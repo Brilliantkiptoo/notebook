@@ -11,7 +11,9 @@ This repository contains the codebase for developing and deploying a sales predi
 - joblib
 
 ##You can install them using pip:
-pip install pandas numpy scikit-learn Flask joblib
+-pip install pandas 
+-numpy scikit-learn 
+-Flask joblib
 
 
 ##Dataset
@@ -37,7 +39,8 @@ Random Forest Regressor
 
 ##Model Deployment
 The trained model can be deployed using Flask. See app.py for the implementation of the Flask API.
- To run the API:python app.py
+ To run the API:
+ -python app.py
 
 
 
