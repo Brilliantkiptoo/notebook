@@ -1,27 +1,48 @@
-# Load your trained model 
-rf_modelmodel = joblib.load('best_random_forest_model.pkl')
+# Sales Prediction Model
 
-@app.route('/predict', methods=['POST'])
-def predict_sales():
-    try:
-        # Get input data from JSON request
-        data = request.get_json()
+## Overview
+This repository contains the codebase for developing and deploying a sales prediction model using machine learning algorithms, namely Linear Regression and Random Forest Regressor.
 
-        # Prepare input data (must match the features used for training)
-        input_features = [data['sell_price'], data['lag_1_sales'], data['lag_2_sales'],
-                          data['lag_3_sales'], data['day_of_week'], data['is_weekend'],
-                          data['event_indicator']]
+## Dependencies
+- pandas
+- numpy
+- sklearn
+- Flask
+- joblib
 
-        # Make a prediction using the loaded model
-        predicted_sales = model.predict([input_features])[0]
+You can install them using pip:
+```shell
+pip install pandas numpy scikit-learn Flask joblib
 
-        # Create a response JSON
-        response = {'predicted_sales': predicted_sales}
 
-        return jsonify(response)
+Dataset
+The dataset used in this project includes the following files:
 
-    except Exception as e:
-        return jsonify({'error': str(e)})
+sales_train.csv: Training data for sales prediction.
+calendar.csv: Contains information about dates.
+items_weekly_sell_prices.csv: Contains weekly selling prices of items.
+calendar_events.csv: Contains information about different events.
+Feature Engineering
+The notebook/code performs extensive feature engineering including:
 
-if __name__ == '__main__':
-    app.run(debug=True)
+Merging multiple datasets
+Creating lag features
+Extracting time-based features
+Handling events and special occasions
+and much moreModel Training and Validation
+Two models are trained and validated using Mean Absolute Error (MAE) as the evaluation metric:
+
+Linear Regression
+Random Forest Regressor
+Model Deployment
+The trained model can be deployed using Flask. See app.py for the implementation of the Flask API.
+ To run the API:python app.py
+
+
+
+
+
+
+
+
+
