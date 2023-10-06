@@ -1,18 +1,43 @@
-from flask import Flask, request, jsonify
-from statsmodels.tsa.statespace.sarimax import SARIMAX
-import pandas as pd
-import joblib
+# Sales Forecasting API
 
-app = Flask(__name__)
+This repository contains the code for a sales forecasting API developed using SARIMA model. The model is trained on historical sales data and can forecast future sales based on the learned patterns.
 
-# Load your pre-trained SARIMA model
-model = joblib.load('pretrained_sarima_model.pkl')
+## 📊 Model Overview
+- **Model**: Seasonal Autoregressive Integrated Moving Average (SARIMA)
+- **Data**: Daily sales data featuring various aspects like item sales, store sales, and event indicators.
+- **Forecast**: Capable of forecasting daily sales for a specified period.
 
-@app.route('/forecast', methods=['POST'])
-def forecast_sales():
-    try:
-        # Get input data from JSON request
-        data = request.get_json()
+## 🚀 API Usage
+The Flask API is simple to use and returns a sales forecast for a given period.
+
+### API Endpoint:
+- **Forecast Sales**: 
+  - **Endpoint**: `/forecast`
+  - **Method**: `POST`
+  - **Data**: 
+    ```json
+    {
+      "start_date": "YYYY-MM-DD",
+      "forecast_period": integer
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "start_date": "YYYY-MM-DD",
+      "forecast_period": integer,
+      "forecasted_sales": [array_of_sales]
+    }
+    ```
+## 💼 Project Structure
+- `model_training.py`: Script for training the SARIMA model and saving it.
+- `api.py`: Flask API to serve the trained model.
+- `pretrained_sarima_model.pkl`: Serialized pre-trained SARIMA model.
+
+## 🛠️ Setup & Installations
+1. Clone the repository:
+   ```sh
+   git clone [repo-link]
 
         # Assuming the input contains the start date and forecast period
         start_date = pd.to_datetime(data['start_date'])
